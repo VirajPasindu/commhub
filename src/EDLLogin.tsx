@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './EDLLogin.css';
 
 const EDLLogin: React.FC = () => {
@@ -6,13 +7,18 @@ const EDLLogin: React.FC = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   const togglePassword = () => setPasswordVisible(!passwordVisible);
   const toggleRememberMe = () => setRememberMe(!rememberMe);
 
   const handleLogin = () => {
     setIsLoading(true);
+
+    // Simulate login delay (you can replace this with real API call later)
     setTimeout(() => {
-      window.location.href = '';
+      setIsLoading(false);
+      navigate('/commhub');   // Navigate to CommHub page
     }, 1500);
   };
 
@@ -26,9 +32,8 @@ const EDLLogin: React.FC = () => {
           <p>The sophisticated communication layer built for high-performance enterprise teams.</p>
 
           <div className="avatars-bottom">
-            
-            <br></br>
-            <br></br>
+            <br />
+            <br />
           </div>
         </div>
 
@@ -50,7 +55,11 @@ const EDLLogin: React.FC = () => {
                   <circle cx="12" cy="7" r="4" />
                 </svg>
               </span>
-              <input type="text" className="input-field" placeholder="035837" />
+              <input 
+                type="text" 
+                className="input-field" 
+                placeholder="035837" 
+              />
             </div>
           </div>
 
@@ -68,7 +77,7 @@ const EDLLogin: React.FC = () => {
                 className="input-field"
                 placeholder="••••••••"
               />
-              <button className="toggle-btn" onClick={togglePassword}>
+              <button className="toggle-btn" onClick={togglePassword} type="button">
                 {passwordVisible ? (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
@@ -95,7 +104,12 @@ const EDLLogin: React.FC = () => {
             <a href="#" className="forgot-btn">Forgot Password?</a>
           </div>
 
-          <button className="login-btn" onClick={handleLogin} disabled={isLoading}>
+          <button 
+            className="login-btn" 
+            onClick={handleLogin} 
+            disabled={isLoading}
+            type="button"
+          >
             {isLoading ? 'Signing in…' : 'Login'}
           </button>
 
