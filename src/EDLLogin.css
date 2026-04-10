@@ -347,3 +347,30 @@
 .right {
   padding: 40px 40px 30px;
 }
+
+.language-switcher {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.lang-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-btn:hover {
+  background: #f0f0f0;
+}
+
+.lang-btn.active {
+  background: #4338ca;
+  color: white;
+  border-color: #4338ca;
+}

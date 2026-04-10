@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './EDLLogin.css';
@@ -55,9 +54,9 @@ const EDLLogin: React.FC = () => {
       } else {
         setError('Invalid username or password');
       }
-    } catch (err: any) {
+    } catch (err: Error | unknown) {
       console.error('Login error:', err);
-      setError(err.message || 'Login failed. Please try again.');
+      setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }

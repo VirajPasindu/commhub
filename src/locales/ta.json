@@ -1,0 +1,15 @@
+{
+  "welcomeBack": "மீண்டும் வரவேற்கிறோம்",
+  "enterCredentials": "உங்கள் சான்றுகளை உள்ளிடவும்.",
+  "username": "பயனர்பெயர்",
+  "password": "கடவுச்சொல்",
+  "rememberMe": "என்னை நினைவில் கொள்ளுங்கள்",
+  "forgotPassword": "கடவுச்சொல் மறந்துவிட்டதா?",
+  "login": "உள்நுழைய",
+  "signingIn": "உள்நுழைந்து கொண்டிருக்கிறது...",
+  "noAccount": "கணக்கு இல்லையா?",
+  "contactSupport": "நிறுவன ஆதரவை தொடர்பு கொள்ளவும்",
+  "userIdPasswordRequired": "UserId மற்றும் கடவுச்சொல் தேவை",
+  "invalidCredentials": "தவறான பயனர்பெயர் அல்லது கடவுச்சொல்",
+  "commhub": "CommHub"
+}

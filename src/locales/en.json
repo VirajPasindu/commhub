@@ -1,0 +1,15 @@
+{
+  "welcomeBack": "Welcome Back",
+  "enterCredentials": "Please enter your credentials to access your dashboard.",
+  "username": "USERNAME",
+  "password": "PASSWORD",
+  "rememberMe": "Remember Me",
+  "forgotPassword": "Forgot Password?",
+  "login": "Login",
+  "signingIn": "Signing in…",
+  "noAccount": "Don't have an account?",
+  "contactSupport": "Contact Enterprise Support",
+  "userIdPasswordRequired": "UserId and Password are required",
+  "invalidCredentials": "Invalid username or password",
+  "commhub": "CommHub"
+}
