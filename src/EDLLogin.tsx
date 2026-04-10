@@ -1,50 +1,85 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './EDLLogin.css';
 
 const EDLLogin: React.FC = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
   const togglePassword = () => setPasswordVisible(!passwordVisible);
   const toggleRememberMe = () => setRememberMe(!rememberMe);
 
-  const handleLogin = () => {
-    setIsLoading(true);
+  const handleLogin = async () => {
+    if (!username.trim() || !password) {
+      setError('UserId and Password are required');
+      return;
+    }
 
-    // Simulate login delay (you can replace this with real API call later)
-    setTimeout(() => {
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/SecInfo/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          UserId: username.trim(),
+          Password: password,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'Login failed');
+      }
+
+      const data = await response.json();
+
+      if (Array.isArray(data) && data.length > 0) {
+        const user = data[0];
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user_id', user.user_id?.trim() || '');
+        localStorage.setItem('user_name', user.user_name?.trim() || '');
+        localStorage.setItem('user_cat', user.user_cat?.trim() || '');
+
+        navigate('/commhub');
+      } else {
+        setError('Invalid username or password');
+      }
+    } catch (err: any) {
+      console.error('Login error:', err);
+      setError(err.message || 'Login failed. Please try again.');
+    } finally {
       setIsLoading(false);
-      navigate('/commhub');   // Navigate to CommHub page
-    }, 1500);
+    }
   };
 
   return (
     <div className="login-page">
       <div className="card">
-        {/* Left Panel - Stacks on top on mobile */}
-        <div className="left">
-          <div className="commhub">CommHub</div>
-          <h1>Connect your workforce with surgical precision.</h1>
-          <p>The sophisticated communication layer built for high-performance enterprise teams.</p>
-
-          <div className="avatars-bottom">
-            <br />
-            <br />
-          </div>
-        </div>
-
-        {/* Right Panel */}
+        {/* Centered Form */}
         <div className="right">
-          <div className="edl-logo">
-            <img src="/logo.jpeg" alt="EDL" />
+          {/* Logo + CommHub Text */}
+          <div className="logo-header">
+            <div className="edl-logo">
+              <img src="/logo.jpeg" alt="EDL" />
+            </div>
+            <span className="commhub-title">CommHub</span>
           </div>
 
           <h2 className="welcome-title">Welcome Back</h2>
           <p className="welcome-sub">Please enter your credentials to access your dashboard.</p>
+
+          {error && <div className="error-message">{error}</div>}
 
           <div className="field">
             <label className="field-label">USERNAME</label>
@@ -55,10 +90,13 @@ const EDLLogin: React.FC = () => {
                   <circle cx="12" cy="7" r="4" />
                 </svg>
               </span>
-              <input 
-                type="text" 
-                className="input-field" 
-                placeholder="035837" 
+              <input
+                type="text"
+                className="input-field"
+                placeholder="035837"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                disabled={isLoading}
               />
             </div>
           </div>
@@ -76,20 +114,17 @@ const EDLLogin: React.FC = () => {
                 type={passwordVisible ? 'text' : 'password'}
                 className="input-field"
                 placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={isLoading}
               />
-              <button className="toggle-btn" onClick={togglePassword} type="button">
-                {passwordVisible ? (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
-                    <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
-                    <line x1="1" y1="1" x2="23" y2="23" />
-                  </svg>
-                ) : (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                )}
+              <button
+                className="toggle-btn"
+                onClick={togglePassword}
+                type="button"
+                disabled={isLoading}
+              >
+                {passwordVisible ? '🙈' : '👁️'}
               </button>
             </div>
           </div>
@@ -104,9 +139,9 @@ const EDLLogin: React.FC = () => {
             <a href="#" className="forgot-btn">Forgot Password?</a>
           </div>
 
-          <button 
-            className="login-btn" 
-            onClick={handleLogin} 
+          <button
+            className="login-btn"
+            onClick={handleLogin}
             disabled={isLoading}
             type="button"
           >

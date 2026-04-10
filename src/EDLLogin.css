@@ -271,3 +271,79 @@
   font-size: 11px;
   color: var(--gray-400);
 }
+
+.error-message {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  border-left: 4px solid #ef4444;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fc;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 460px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.right {
+  padding: 40px 40px 30px;
+}
+
+/* Logo + CommHub Title */
+.logo-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.edl-logo img {
+  height: 42px;           /* Matches your screenshot */
+  width: auto;
+}
+
+.commhub-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 28px;        /* Matches logo height */
+  font-weight: 700;
+  color: #1a1a2e;
+  letter-spacing: -0.5px;
+}
+
+/* Rest of your existing styles remain the same */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fc;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 460px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.right {
+  padding: 40px 40px 30px;
+}
