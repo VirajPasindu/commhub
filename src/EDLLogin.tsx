@@ -27,9 +27,7 @@ const EDLLogin: React.FC = () => {
     try {
       const response = await fetch('/api/SecInfo/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           UserId: username.trim(),
           Password: password,
@@ -54,9 +52,10 @@ const EDLLogin: React.FC = () => {
       } else {
         setError('Invalid username or password');
       }
-    } catch (err: Error | unknown) {
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Login failed. Please try again.';
       console.error('Login error:', err);
-      setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -65,7 +64,6 @@ const EDLLogin: React.FC = () => {
   return (
     <div className="login-page">
       <div className="card">
-        {/* Centered Form */}
         <div className="right">
           {/* Logo + CommHub Text */}
           <div className="logo-header">
@@ -155,7 +153,7 @@ const EDLLogin: React.FC = () => {
       </div>
 
       <footer className="footer">
-        © 2026 UTILITY SOLUTIONS &amp; AUTOMATION BRANCH, EDL. ALL RIGHTS RESERVED
+        © 2026 UTILITY SOLUTIONS & AUTOMATION BRANCH, EDL. ALL RIGHTS RESERVED
       </footer>
     </div>
   );

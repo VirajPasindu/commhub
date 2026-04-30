@@ -740,6 +740,28 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Larger Hero Title */
+.hero-h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 68px;           /* Increased significantly */
+  font-weight: 900;
+  line-height: 1.05;
+  color: #1f2937;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+}
+
+.hero-h1 .accent {
+  color: #4338ca;
+}
+
+/* Make it even bigger on large screens */
+@media (min-width: 1024px) {
+  .hero-h1 {
+    font-size: 74px;
+  }
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .hero {
